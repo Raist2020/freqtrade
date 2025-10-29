@@ -3951,3 +3951,20 @@ class Exchange:
         :return: Datetime if the pair gonna be delisted, None otherwise
         """
         return None
+# ----------------------------------------
+# Added for Abstrasction Base / first PR
+# ----------------------------------------
+def list_supported_timeframes(exchange):
+    
+    """
+    Returns a list of timeframes supported by the given exchange instance.
+    """
+    try:
+        if hasattr(exchange, 'timeframes') and exchange.timeframes:
+            return list(exchange.timeframes.keys())
+        else:
+            logging.warning(f"Exchange {exchange} has no attribute 'timeframes'.")
+            return []
+    except Exception as e:
+        logging.warning(f"Failed to get timeframes from exchange: {e}")
+        return []
